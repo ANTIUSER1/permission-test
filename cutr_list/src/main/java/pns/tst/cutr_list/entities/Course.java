@@ -2,11 +2,13 @@ package pns.tst.cutr_list.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
+//@ToString
 public class Course {
 
     /**
@@ -26,7 +28,7 @@ public class Course {
     /**
      * link to currency
      */
-    @ManyToOne(  cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Curruncy curruncy;
 
 }
