@@ -12,10 +12,11 @@ import pns.tst.cutr_list.repositories.CourseRepository;
 import pns.tst.cutr_list.repositories.CurrencyRepository;
 import pns.tst.cutr_list.services.AddDataService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/make")
+@RequestMapping("/")
 @Slf4j
 public class CurrencyController {
 
@@ -26,7 +27,7 @@ public class CurrencyController {
     @Autowired
     private CourseRepository courseRepository;
 
-    @GetMapping("/m")
+    @GetMapping("/make")
     public String createData(){
         List<Currency> data = addDataService.addCurrencyData();
         currencyRepository.saveAll(data);
@@ -34,12 +35,50 @@ public class CurrencyController {
         return "Data added " + data;
     }
 
-    @GetMapping("currency/{name}")
-    public String getCurrensyIdByName(@PathVariable String name) {
+    @GetMapping("/currency/{name}")
+    public String getCurrensyIdByName(
+            @PathVariable String name
+            //,    @PathVariable String date
+    ) {
         long npp = 0;
-        Long currencyId = currencyRepository.getCurrensyIdByName(name);
+        Long currencyId = currencyRepository
+                .getCurrensyIdByName(name);
+//        List<Course> courseList = courseRepository
+//                .getCuurseListByCurrencyIdAndDate(currencyId, date);
         List<Course> courseList = courseRepository.getCuurseListByCurrencyId(currencyId);
         StringBuffer sbf = new StringBuffer(name).append(" <hr /> ");
+
+        if (courseList == null) return "NOT DATA FOUND";
+        for (Course course : courseList) {
+            npp++;
+            sbf.append(npp).append(" &nbsp; | &nbsp;")
+                    .append(course.getCourseDate().getYear()).append('-')
+                    .append(course.getCourseDate().getMonth()).append('-')
+                    .append(course.getCourseDate().getDayOfMonth())
+                    .append("  : &nbsp;&nbsp;&nbsp;  ")
+                    .append(course.getValue())
+                    .append(" <br />");
+        }
+        return sbf.toString();
+        //name + "   " + currencyIdi;
+
+    }
+
+    @GetMapping("/currency/{name}/{date}")
+    public String getCuurseListByCurrencyIdAndDate(
+            @PathVariable String name
+            , @PathVariable LocalDate date
+    ) {
+        long npp = 0;
+        Long currencyId = currencyRepository
+                .getCurrensyIdByName(name);
+        List<Course> courseList = courseRepository
+                .getCuurseListByCurrencyIdAndDate(currencyId, date);
+        StringBuffer sbf = new StringBuffer(name)
+                .append(" for ").append(date)
+                .append(" <hr /> ");
+
+        if (courseList == null) return "NOT DATA FOUND";
         for (Course course : courseList) {
             npp++;
             sbf.append(npp).append(" &nbsp; | &nbsp;")

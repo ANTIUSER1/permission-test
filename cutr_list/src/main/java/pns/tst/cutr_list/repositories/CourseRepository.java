@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pns.tst.cutr_list.entities.Course;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -16,6 +17,16 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Long> {
 
-    @Query(value = " select * from course where currency_id = ?1 ", nativeQuery = true)
+    @Query(
+            value = " select * from course " +
+                    "where currency_id = :id ",
+            nativeQuery = true)
     public List<Course> getCuurseListByCurrencyId(@Param("id") Long id);
+
+    @Query(
+            value = " select * from course " +
+                    "where currency_id = :id and course_date = :d ",
+            nativeQuery = true)
+    public List<Course> getCuurseListByCurrencyIdAndDate(
+            @Param("id") Long id, @Param("d") LocalDate date);
 }
