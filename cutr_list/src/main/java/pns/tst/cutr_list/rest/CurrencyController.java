@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pns.tst.cutr_list.entities.Course;
 import pns.tst.cutr_list.entities.Currency;
+import pns.tst.cutr_list.repositories.CourseRepository;
 import pns.tst.cutr_list.repositories.CurrencyRepository;
 import pns.tst.cutr_list.services.AddDataService;
 
@@ -21,6 +23,8 @@ public class CurrencyController {
     private AddDataService addDataService;
     @Autowired
     private CurrencyRepository currencyRepository;
+    @Autowired
+    private CourseRepository courseRepository;
 
     @GetMapping("/m")
     public String createData(){
@@ -32,9 +36,23 @@ public class CurrencyController {
 
     @GetMapping("currency/{name}")
     public String getCurrensyIdByName(@PathVariable String name) {
-        Long ci = currencyRepository.getCurrensyIdByName(name);
-
-        return name + "   " + ci;
+        long npp = 0;
+        Long currencyId = currencyRepository.getCurrensyIdByName(name);
+        List<Course> courseList = courseRepository.getCuurseListByCurrencyId(currencyId);
+        StringBuffer sbf = new StringBuffer(name).append(" <hr /> ");
+        for (Course course : courseList) {
+            npp++;
+            sbf.append(npp).append(" &nbsp; | &nbsp;")
+                    .append(course.getCourseDate().getYear()).append('-')
+                    .append(course.getCourseDate().getMonth()).append('-')
+                    .append(course.getCourseDate().getDayOfMonth())
+                    .append("  : &nbsp;&nbsp;&nbsp;  ")
+                    .append(course.getValue())
+                    .append(" <br />");
+        }
+        return sbf.toString();
+        //name + "   " + currencyIdi;
 
     }
+
 }
