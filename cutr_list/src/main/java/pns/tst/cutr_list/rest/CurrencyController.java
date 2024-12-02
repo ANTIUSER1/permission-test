@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pns.tst.cutr_list.entities.Curruncy;
 import pns.tst.cutr_list.repositories.CurrencyRepository;
 import pns.tst.cutr_list.services.AddDataService;
-import pns.tst.cutr_list.services.CurrencyService;
 
 import java.util.List;
 
@@ -26,8 +25,9 @@ public class CurrencyController {
     public String createData(){
         List<Curruncy> data= addDataService.addCurrencyData();
         currencyRepository.saveAll(data);
-      log.info("Data added "+data);
-        return "Data added "+data.size();
+        log.info("Data added " + data)
+        ;
+        return "Data added " + data;
     }
 
 }

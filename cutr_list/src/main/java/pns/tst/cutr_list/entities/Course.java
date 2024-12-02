@@ -1,13 +1,12 @@
 package pns.tst.cutr_list.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Setter
 //@ToString
 public class Course {
 

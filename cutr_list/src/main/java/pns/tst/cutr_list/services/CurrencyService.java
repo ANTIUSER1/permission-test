@@ -23,8 +23,6 @@ public class CurrencyService {
         for (long k = -20; k < 20; k++) {
             Course course = courseService.create(k);
             course.setCurruncy(result);
-            log.info("Create Course "+course  );
-
             result.addCourse(course );
 
         }

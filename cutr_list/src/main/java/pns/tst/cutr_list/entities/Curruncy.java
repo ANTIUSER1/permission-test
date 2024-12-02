@@ -1,14 +1,13 @@
 package pns.tst.cutr_list.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Setter
 //@ToString
 public class Curruncy {
     /**
