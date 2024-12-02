@@ -7,5 +7,5 @@ import pns.tst.cutr_list.entities.Course;
 
 @Transactional
 @Repository
-public interface CourseRepository extends CrudRepository<Course, String> {
+public interface CourseRepository extends CrudRepository<Course, Long> {
 }
