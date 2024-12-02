@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pns.tst.cutr_list.entities.Course;
-import pns.tst.cutr_list.entities.Curruncy;
+import pns.tst.cutr_list.entities.Currency;
 
 /**
  * creating currency
@@ -16,13 +16,13 @@ public class CurrencyService {
     @Autowired
     private CourseService courseService;
 
-    public Curruncy create(String currName) {
-        Curruncy result = new Curruncy();
+    public Currency create(String currName) {
+        Currency result = new Currency();
         result.setName(currName);
         log.info("Create Currency "+result+"  Adding Course");
         for (long k = -20; k < 20; k++) {
             Course course = courseService.create(k);
-            course.setCurruncy(result);
+            course.setCurrency(result);
             result.addCourse(course );
 
         }

@@ -28,6 +28,6 @@ public class Course {
      * link to currency
      */
     @ManyToOne(cascade = CascadeType.ALL)
-    private Curruncy curruncy;
+    private Currency currency;
 
 }

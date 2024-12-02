@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Setter
 //@ToString
-public class Curruncy {
+public class Currency {
     /**
      * identifier
      */
@@ -23,7 +23,7 @@ public class Curruncy {
     /**
      * course list
      */
-    @OneToMany(mappedBy = "curruncy", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL)
     private List<Course> courseList;
 
     public  void addCourse(Course course){
