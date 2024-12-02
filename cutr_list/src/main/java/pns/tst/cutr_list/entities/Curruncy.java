@@ -1,10 +1,9 @@
 package pns.tst.cutr_list.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +18,9 @@ public class Curruncy {
      * name
      */
     private String name;
-
+    /**
+     * course list
+     */
+    @OneToMany( mappedBy = "curruncy", cascade = CascadeType.ALL)
+    private List<Course> corseList;
 }

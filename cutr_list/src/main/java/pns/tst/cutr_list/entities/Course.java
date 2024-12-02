@@ -1,16 +1,13 @@
 package pns.tst.cutr_list.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Entity
 @Data
-public class Corse {
+public class Course {
 
     /**
      * identifier
@@ -26,5 +23,10 @@ public class Corse {
      * date when course set
      */
     private LocalDate courseDate;
+    /**
+     * link to currency
+     */
+    @ManyToOne(  cascade = CascadeType.ALL)
+    private Curruncy curruncy;
 
 }
