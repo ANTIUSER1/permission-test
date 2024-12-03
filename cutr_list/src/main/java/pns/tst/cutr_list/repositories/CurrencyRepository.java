@@ -14,7 +14,7 @@ import pns.tst.cutr_list.entities.Currency;
 @Repository
 public interface CurrencyRepository extends CrudRepository<Currency, Long> {
     @Query(" select  get_currency_id_byname( ?1 )")
-    public Long getCurrensyIdByName(@Param("name") String name);
+    Long getCurrensyIdByName(@Param("name") String name);
 
 
 }

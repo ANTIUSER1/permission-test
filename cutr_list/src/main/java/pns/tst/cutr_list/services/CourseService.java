@@ -10,7 +10,12 @@ import java.time.LocalDate;
  */
 @Service
 public class CourseService {
-
+    /**
+     * create course
+     *
+     * @param day
+     * @return
+     */
     public Course create(long day) {
         Course result = new Course();
         result.setValue(Math.random() * 100);

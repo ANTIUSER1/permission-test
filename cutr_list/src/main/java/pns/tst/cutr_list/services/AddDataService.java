@@ -18,6 +18,11 @@ public class AddDataService {
     @Autowired
     private CurrencyService currencyService;
 
+    /**
+     * add data
+     *
+     * @return
+     */
     public List<Currency> addCurrencyData() {
         List<Currency> result = new ArrayList<>();
 
@@ -28,8 +33,8 @@ public class AddDataService {
         result.add(currencyService.create("GB"));
         result.add(currencyService.create("FR"));
         result.add(currencyService.create("USD"));
-log.info(" CREATE CURRENCY SET   "+result);
+        log.info(" CREATE CURRENCY SET   " + result);
 
-return result;
+        return result;
     }
 }

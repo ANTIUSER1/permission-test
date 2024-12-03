@@ -6,6 +6,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Currency
+ */
 @Entity
 @Setter
 //@ToString
@@ -26,8 +29,8 @@ public class Currency {
     @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL)
     private List<Course> courseList;
 
-    public  void addCourse(Course course){
-        if(courseList ==null ) courseList =new ArrayList<>();
+    public void addCourse(Course course) {
+        if (courseList == null) courseList = new ArrayList<>();
         courseList.add(course);
     }
 }

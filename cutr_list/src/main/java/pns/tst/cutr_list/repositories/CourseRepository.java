@@ -16,17 +16,28 @@ import java.util.List;
 @Transactional
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Long> {
-
+    /**
+     * getting courses from db dy currency id
+     *
+     * @param id
+     * @return
+     */
     @Query(
             value = " select * from course " +
                     "where currency_id = :id ",
             nativeQuery = true)
-    public List<Course> getCuurseListByCurrencyId(@Param("id") Long id);
+    List<Course> getCuurseListByCurrencyId(@Param("id") Long id);
 
+    /**
+     * getting courses from db dy currency id && date
+     * @param id
+     * @param date
+     * @return
+     */
     @Query(
             value = " select * from course " +
                     "where currency_id = :id and course_date = :d ",
             nativeQuery = true)
-    public List<Course> getCuurseListByCurrencyIdAndDate(
+    List<Course> getCuurseListByCurrencyIdAndDate(
             @Param("id") Long id, @Param("d") LocalDate date);
 }

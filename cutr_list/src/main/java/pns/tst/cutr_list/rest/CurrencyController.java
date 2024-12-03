@@ -15,6 +15,9 @@ import pns.tst.cutr_list.services.AddDataService;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * creation/showing data
+ */
 @RestController
 @RequestMapping("/")
 @Slf4j
@@ -27,24 +30,32 @@ public class CurrencyController {
     @Autowired
     private CourseRepository courseRepository;
 
+    /**
+     * creating data
+     *
+     * @return
+     */
     @GetMapping("/make")
-    public String createData(){
+    public String createData() {
         List<Currency> data = addDataService.addCurrencyData();
         currencyRepository.saveAll(data);
         log.info("Data added " + data);
         return "Data added " + data;
     }
 
+    /**
+     * search currency   by name and output
+     *
+     * @param name
+     * @return
+     */
     @GetMapping("/currency/{name}")
     public String getCurrensyIdByName(
             @PathVariable String name
-            //,    @PathVariable String date
     ) {
         long npp = 0;
         Long currencyId = currencyRepository
                 .getCurrensyIdByName(name);
-//        List<Course> courseList = courseRepository
-//                .getCuurseListByCurrencyIdAndDate(currencyId, date);
         List<Course> courseList = courseRepository.getCuurseListByCurrencyId(currencyId);
         StringBuffer sbf = new StringBuffer(name).append(" <hr /> ");
 
@@ -64,10 +75,16 @@ public class CurrencyController {
 
     }
 
+    /**
+     * search currency   by name && date and output
+     *
+     * @param date
+     * @param name
+     * @return
+     */
     @GetMapping("/currency/{name}/{date}")
     public String getCuurseListByCurrencyIdAndDate(
-            @PathVariable String name
-            , @PathVariable LocalDate date
+            @PathVariable String name, @PathVariable LocalDate date
     ) {
         long npp = 0;
         Long currencyId = currencyRepository
