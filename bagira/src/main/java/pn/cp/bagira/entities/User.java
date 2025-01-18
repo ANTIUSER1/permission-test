@@ -22,7 +22,7 @@ public class User {
 
     @ManyToMany
     @MapKeyJoinColumn( name = "APP_ID")
-    @JoinTable( name = "_USER_APP_PERM_" ,
+    @JoinTable( name = "_COMP_USER_APP_PERM_" ,
             joinColumns =@JoinColumn( name = "USER_ID"),
             inverseJoinColumns = @JoinColumn( name = "PERM_ID")
     )
