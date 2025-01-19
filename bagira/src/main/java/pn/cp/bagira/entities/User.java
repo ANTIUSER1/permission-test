@@ -1,32 +1,26 @@
 package pn.cp.bagira.entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
-@ToString
+//@ToString
 public class User  implements Serializable {
 
     @Id
-  //  @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @ManyToOne
-    private Comp comp;
 
-    @OneToMany( mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "user"//,
+        //    cascade = CascadeType.ALL
+    )
+  //  @JoinColumn( name = "user_id")
     private List<Application> applicationList;
 
-    @PrePersist
-    public  void prePersist(){id=UUID.randomUUID().toString();}
 }

@@ -6,11 +6,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import pn.cp.bagira.entities.User;
 
-import java.util.UUID;
-
 @Transactional
 public interface UserRepository extends CrudRepository<User, String> {
 
     @Query( value = "  SELECT * FROM users WHERE  id = :id ", nativeQuery = true)
-    public User getUserById(@Param("id") String uid);
+    public User getById(@Param("id") String uid);
 }

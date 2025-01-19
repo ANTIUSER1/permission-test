@@ -5,14 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pn.cp.bagira.db.ApplicationRepository;
 import pn.cp.bagira.db.UserRepository;
 import pn.cp.bagira.entities.Application;
 import pn.cp.bagira.entities.User;
 import pn.cp.bagira.srv.AppDataService;
 import pn.cp.bagira.srv.UserDataService;
-
-import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -24,6 +22,12 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ApplicationRepository appRepository;
+
+    @Autowired
+    private ApplicationRepository applicationRepository;
 
     @Autowired
     private AppDataService appService;
@@ -50,18 +54,44 @@ public class UserController {
     public User  addAppPermission(@RequestBody String json, @RequestParam String appName)
             throws JsonProcessingException {
         ObjectMapper mapper=new ObjectMapper();
-        User u= mapper.readValue(json, User.class);
-        //User  u = userRepository.findById(uid).get();
 
+//        User u=userRepository.getUserById(json);
+        User u=mapper.readValue(json, User.class);
+      ;
         log.info("User found {} ", u);
         if(u!=null){
-            Application a=appService.create(appName);
-        //    a.setUser(user);
-          u=  userDataService.addAppPermission(u,a );
-
+            Application a =appService.create(appName);
+            a.setUser(u);
+            u=  userDataService.addAppPermission(u,a );
+           // a.setUser(u);
+            log.info(
+                    "\n APP ADDED, \n {} ", a
+            );
+            //userRepository.save(u);
+            applicationRepository.save(a);
         }
-        userRepository.save(u);
-
         return u;
+    }
+
+
+    @GetMapping("/join-app/{uid}/{aid}")
+    public String joinApp(@PathVariable String  uid, @PathVariable String aid) throws JsonProcessingException {
+        User u=userRepository.getById(uid);
+        log.info(
+                "\n   UUU: \n{} ", u
+        );
+//        Application a= appRepository.getById(aid);
+//        log.info(
+//                "\n   APP: \n{} ", a
+//        );
+       // a.setUser(u);
+        //userDataService.addAppPermission(u,a);
+//        Map<User,Application> mp=new HashMap<>();
+//        mp.put(u,a);
+       // applicationRepository.save(a);
+
+        ObjectMapper mapper=new ObjectMapper();
+        return "1212122";
+                //mapper.writeValueAsString(mp);
     }
 }
