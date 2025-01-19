@@ -1,30 +1,30 @@
 package pn.cp.bagira.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
+@Builder
 @ToString
-public class User {
+public class User  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @ManyToOne
-    private Comp computer;
+    private Comp comp;
 
-    @ManyToMany
-    @MapKeyJoinColumn( name = "APP_ID")
-    @JoinTable( name = "_COMP_USER_APP_PERM_" ,
-            joinColumns =@JoinColumn( name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn( name = "PERM_ID")
-    )
-    private Map<Application, Permission> permitionMap;
+    @OneToMany( mappedBy = "user")
+    private List<Application> applicationList;
+
 }

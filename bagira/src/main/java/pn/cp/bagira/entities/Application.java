@@ -1,20 +1,26 @@
 package pn.cp.bagira.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "apps")
 @Data
+@Builder
 @ToString
-public class Application {
+public class Application  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private String name;
+    private byte permValue;
 
-
+    @ManyToOne
+    private User user;
 }
