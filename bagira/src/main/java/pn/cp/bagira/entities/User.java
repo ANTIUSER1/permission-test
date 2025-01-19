@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "users")
@@ -27,8 +28,18 @@ public class User  implements Serializable {
             name = "USER_APP",
             joinColumns = @JoinColumn(   name = "UID"),
             inverseJoinColumns = @JoinColumn(name = "AID")
-
-    )
+ )
     private List<Application> applicationList;
+
+    @ManyToMany(
+            cascade = CascadeType.ALL
+    )
+    @MapKeyJoinColumn( name ="AID")
+    @JoinTable(
+            name = "APP_PERM",
+            joinColumns = @JoinColumn(   name = "UID"),
+            inverseJoinColumns = @JoinColumn(name = "PID")
+ )
+    private Map<Application, Permission> applicationPermissionMap;
 
 }

@@ -77,6 +77,7 @@ public class ApplicationController {
             userDataService.addAppPermission(u,a);}
         applicationRepository.saveAll(alist);
     }
+
     @GetMapping("/au/")
     public void addAllAppToAllUser(  ) throws JsonProcessingException {
 
