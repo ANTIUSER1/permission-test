@@ -12,6 +12,9 @@ import pn.cp.bagira.entities.User;
 import pn.cp.bagira.srv.AppDataService;
 import pn.cp.bagira.srv.UserDataService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -42,9 +45,8 @@ public class UserController {
         return u;
     }
 
-
     @GetMapping("/f/{id}")
-    public User  userByID(@PathVariable String id){
+    public User  userByID(@PathVariable Long id){
         log.info("  U ID {}", id);
         User u = userRepository.findById(id).get() ;
       return u;
@@ -61,7 +63,7 @@ public class UserController {
         log.info("User found {} ", u);
         if(u!=null){
             Application a =appService.create(appName);
-            a.setUser(u);
+            a.getUserList().add(u);
             u=  userDataService.addAppPermission(u,a );
            // a.setUser(u);
             log.info(
@@ -74,24 +76,4 @@ public class UserController {
     }
 
 
-    @GetMapping("/join-app/{uid}/{aid}")
-    public String joinApp(@PathVariable String  uid, @PathVariable String aid) throws JsonProcessingException {
-        User u=userRepository.getById(uid);
-        log.info(
-                "\n   UUU: \n{} ", u
-        );
-//        Application a= appRepository.getById(aid);
-//        log.info(
-//                "\n   APP: \n{} ", a
-//        );
-       // a.setUser(u);
-        //userDataService.addAppPermission(u,a);
-//        Map<User,Application> mp=new HashMap<>();
-//        mp.put(u,a);
-       // applicationRepository.save(a);
-
-        ObjectMapper mapper=new ObjectMapper();
-        return "1212122";
-                //mapper.writeValueAsString(mp);
-    }
 }

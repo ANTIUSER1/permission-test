@@ -13,14 +13,22 @@ import java.util.List;
 public class User  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
+    @ManyToOne(
+            cascade = CascadeType.ALL)
+    private Comp comp;
 
-    @OneToMany( mappedBy = "user"//,
-        //    cascade = CascadeType.ALL
+    @ManyToMany(
+            cascade = CascadeType.ALL
     )
-  //  @JoinColumn( name = "user_id")
+    @JoinTable(
+            name = "USER_APP",
+            joinColumns = @JoinColumn(   name = "UID"),
+            inverseJoinColumns = @JoinColumn(name = "AID")
+
+    )
     private List<Application> applicationList;
 
 }

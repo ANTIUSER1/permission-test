@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pn.cp.bagira.entities.User;
 
 @Transactional
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
     @Query( value = "  SELECT * FROM users WHERE  id = :id ", nativeQuery = true)
-    public User getById(@Param("id") String uid);
+    public User getById(@Param("id") Long uid);
 }

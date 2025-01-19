@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "apps")
@@ -12,14 +13,13 @@ import java.io.Serializable;
 public class Application  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
-    private byte permValue;
 
-    @ManyToOne(
-           // cascade = CascadeType.ALL
+
+    @ManyToMany(// mappedBy = "applicationList",
+           cascade = CascadeType.ALL
     )
-    @JoinColumn( name = "user_id")
-    private User user;
+    private List<User> userList;
 }

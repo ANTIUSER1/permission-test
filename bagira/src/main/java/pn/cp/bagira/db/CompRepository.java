@@ -7,7 +7,7 @@ import pn.cp.bagira.entities.Comp;
 import java.util.UUID;
 
 @Transactional
-public interface CompRepository extends CrudRepository<Comp, UUID> {
+public interface CompRepository extends CrudRepository<Comp, Long> {
 
 
 }
