@@ -41,5 +41,4 @@ public class User  implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "PID")
  )
     private Map<Application, Permission> applicationPermissionMap;
-
 }
