@@ -4,16 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import pn.cp.bagira.db.CompRepository;
+import org.springframework.web.bind.annotation.*;
 import pn.cp.bagira.db.UserRepository;
-import pn.cp.bagira.entities.Comp;
+import pn.cp.bagira.entities.Application;
 import pn.cp.bagira.entities.User;
+import pn.cp.bagira.srv.AppDataService;
 import pn.cp.bagira.srv.UserDataService;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -27,23 +26,42 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    private CompRepository compRepository;
+    private AppDataService appService;
 
-    @PostMapping("/new")
-    public User create(@RequestBody String compJson) throws JsonProcessingException {
-
-   log.info("JSON:\n {}", compJson);
-   ObjectMapper mapper=new ObjectMapper();
-
-        Comp c = mapper.readValue(compJson, Comp.class) ;
-        log.info("FROM COMP {} ", c);
-   //    log.info("UU USER WIL BE CREATED from {}", c);
-//        User u = userDataService.create(c);
-//        log.info(
-//                "USER CREATED: {} \n FROM {}", u, c
-//        );
-
-        return null;
+    @GetMapping("/new")
+    public User create( ) throws JsonProcessingException {
+     User u = userDataService.create( );
+        log.info(
+                "USER CREATED: {} \n ", u
+        );
+        userRepository.save(u);
+        return u;
     }
 
+
+    @GetMapping("/f/{id}")
+    public User  userByID(@PathVariable String id){
+        log.info("  U ID {}", id);
+        User u = userRepository.findById(id).get() ;
+      return u;
+    }
+
+    @PostMapping("/add-app")
+    public User  addAppPermission(@RequestBody String json, @RequestParam String appName)
+            throws JsonProcessingException {
+        ObjectMapper mapper=new ObjectMapper();
+        User u= mapper.readValue(json, User.class);
+        //User  u = userRepository.findById(uid).get();
+
+        log.info("User found {} ", u);
+        if(u!=null){
+            Application a=appService.create(appName);
+        //    a.setUser(user);
+          u=  userDataService.addAppPermission(u,a );
+
+        }
+        userRepository.save(u);
+
+        return u;
+    }
 }

@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pn.cp.bagira.db.ApplicationRepository;
 import pn.cp.bagira.entities.Application;
-import pn.cp.bagira.entities.Comp;
-import pn.cp.bagira.srv.ApplicationService;
+import pn.cp.bagira.srv.AppDataService;
 
 @RestController
 @RequestMapping("/app")
@@ -18,7 +17,7 @@ import pn.cp.bagira.srv.ApplicationService;
 public class ApplicationController {
 
     @Autowired
-    private ApplicationService applicationService;
+    private AppDataService applicationService;
 
     @Autowired
     private ApplicationRepository appRepository;

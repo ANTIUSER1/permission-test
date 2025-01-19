@@ -11,7 +11,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "apps")
 @Data
-@Builder
 @ToString
 public class Application  implements Serializable {
 
@@ -21,6 +20,6 @@ public class Application  implements Serializable {
     private String name;
     private byte permValue;
 
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.ALL)
     private User user;
 }

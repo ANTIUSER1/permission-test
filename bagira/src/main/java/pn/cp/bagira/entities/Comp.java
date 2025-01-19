@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "comps")
 @Data
-@Builder
 @ToString
 public class Comp implements Serializable {
 

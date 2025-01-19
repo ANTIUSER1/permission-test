@@ -3,6 +3,7 @@ package pn.cp.bagira.entities;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -13,18 +14,19 @@ import java.util.UUID;
 @Entity
 @Table(name = "users")
 @Data
-@Builder
 @ToString
 public class User  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+  //  @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @ManyToOne
     private Comp comp;
 
-    @OneToMany( mappedBy = "user")
+    @OneToMany( mappedBy = "user", cascade = CascadeType.ALL)
     private List<Application> applicationList;
 
+    @PrePersist
+    public  void prePersist(){id=UUID.randomUUID().toString();}
 }

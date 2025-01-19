@@ -11,9 +11,8 @@ import java.util.UUID;
 public class CompDataService {
 
     public Comp create(String mac){
-        return Comp.builder()
-                //.compUserList(new ArrayList<>())
-                .mac(mac)
-                .build();
+        Comp c = new Comp();
+        c.setMac(mac);
+         return c;
     }
 }

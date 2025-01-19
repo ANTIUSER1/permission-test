@@ -4,11 +4,11 @@ import org.springframework.stereotype.Service;
 import pn.cp.bagira.entities.Application;
 
 @Service
-public class ApplicationService {
+public class AppDataService {
 
     public Application create(String s){
-        return Application.builder()
-                .name(s)
-                .build();
+      Application app=new Application();
+              app.setName(s);
+               return app;
     }
 }
