@@ -11,7 +11,7 @@ import java.util.Map;
 @Table(name = "users")
 @Data
 //@ToString
-public class User  implements Serializable {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +19,11 @@ public class User  implements Serializable {
 
     @ManyToOne(
             cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "USER_COMP",
+            joinColumns = @JoinColumn(name = "UID"),
+            inverseJoinColumns = @JoinColumn(name = "CID")
+    )
     private Comp comp;
 
     @ManyToMany(
@@ -26,19 +31,19 @@ public class User  implements Serializable {
     )
     @JoinTable(
             name = "USER_APP",
-            joinColumns = @JoinColumn(   name = "UID"),
+            joinColumns = @JoinColumn(name = "UID"),
             inverseJoinColumns = @JoinColumn(name = "AID")
- )
+    )
     private List<Application> applicationList;
 
     @ManyToMany(
             cascade = CascadeType.ALL
     )
-    @MapKeyJoinColumn( name ="AID")
+    @MapKeyJoinColumn(name = "AID")
     @JoinTable(
             name = "APP_PERM",
-            joinColumns = @JoinColumn(   name = "UID"),
+            joinColumns = @JoinColumn(name = "UID"),
             inverseJoinColumns = @JoinColumn(name = "PID")
- )
+    )
     private Map<Application, Permission> applicationPermissionMap;
 }

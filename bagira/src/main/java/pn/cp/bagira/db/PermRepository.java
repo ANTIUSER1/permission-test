@@ -10,8 +10,8 @@ import pn.cp.bagira.entities.Permission;
 @Transactional
 public interface PermRepository extends CrudRepository<Permission, Long> {
 
-    @Query( value = "  SELECT * FROM perms WHERE  id = :id ", nativeQuery = true)
-    public Application getById(@Param("id") Long uid);
+    @Query(value = "  SELECT * FROM perms WHERE  id = :id ", nativeQuery = true)
+    Application getById(@Param("id") Long uid);
 
 
 }

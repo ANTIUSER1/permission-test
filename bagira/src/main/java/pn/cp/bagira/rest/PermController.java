@@ -34,10 +34,10 @@ public class PermController {
     private PermDataService permDataService;
 
     @GetMapping("/apu/")
-    public void addAllAppPermToAllUser(  ) throws JsonProcessingException {
+    public void addAllAppPermToAllUser() throws JsonProcessingException {
 
-        List<User> uList= (List<User>) userRepository.findAll();
-        for( User u : uList) {
+        List<User> uList = (List<User>) userRepository.findAll();
+        for (User u : uList) {
             log.info(
                     "\n   UUU: \n{} ", u
             );
@@ -46,9 +46,10 @@ public class PermController {
                 log.info(
                         "\n   APP: \n{} ", a
                 );
-                u.getApplicationPermissionMap().put(a,permDataService.create());
+                u.getApplicationPermissionMap().put(a, permDataService.create());
             }
         }
         userRepository.saveAll(uList);
 
-    }}
+    }
+}

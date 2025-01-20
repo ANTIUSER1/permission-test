@@ -7,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import pn.cp.bagira.entities.Application;
 
 @Transactional
-public interface ApplicationRepository  extends CrudRepository<Application, Long> {
+public interface ApplicationRepository extends CrudRepository<Application, Long> {
 
-    @Query( value = "  SELECT * FROM apps WHERE  id = :id ", nativeQuery = true)
-    public Application getById(@Param("id") Long uid);
+    @Query(value = "  SELECT * FROM apps WHERE  id = :id ", nativeQuery = true)
+    Application getById(@Param("id") Long uid);
 
 
 }

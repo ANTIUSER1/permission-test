@@ -6,7 +6,7 @@ import pn.cp.bagira.entities.Permission;
 @Service
 public class PermDataService {
 
-    public Permission create(){
+    public Permission create() {
         return new Permission();
     }
 }

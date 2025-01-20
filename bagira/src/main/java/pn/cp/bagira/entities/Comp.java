@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "comps")
@@ -22,7 +21,6 @@ public class Comp implements Serializable {
     private Set<User> userSet;
 
 //
-
 
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "apps")
 @Data
 //@ToString
-public class Application  implements Serializable {
+public class Application implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +19,7 @@ public class Application  implements Serializable {
 
 
     @ManyToMany(// mappedBy = "applicationList",
-           cascade = CascadeType.ALL
+            cascade = CascadeType.ALL
     )
     private List<User> userList;
 }

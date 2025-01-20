@@ -13,24 +13,24 @@ import java.util.HashMap;
 @Slf4j
 public class UserDataService {
 
-    public User create( ) {
-      return  new User();
+    public User create() {
+        return new User();
     }
 
-    public User addAppPermission(User user, Application app){
+    public User addAppPermission(User user, Application app) {
         log.info(
                 "\n    ADD TO USER APP_LIST \n {}", user.getApplicationList()
         );
-        if(user.getApplicationList()==null)
+        if (user.getApplicationList() == null)
             user.setApplicationList(new ArrayList<>());
         user.getApplicationList().add(app);
         return user;
     }
 
-    public User putAppPermission(User user, Application app, Permission perm){
-        if(user.getApplicationPermissionMap()==null)
+    public User putAppPermission(User user, Application app, Permission perm) {
+        if (user.getApplicationPermissionMap() == null)
             user.setApplicationPermissionMap(new HashMap<>());
-        user.getApplicationPermissionMap().put(app,perm);
+        user.getApplicationPermissionMap().put(app, perm);
         return user;
     }
 }

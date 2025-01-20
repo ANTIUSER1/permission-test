@@ -9,6 +9,6 @@ import pn.cp.bagira.entities.User;
 @Transactional
 public interface UserRepository extends CrudRepository<User, Long> {
 
-    @Query( value = "  SELECT * FROM users WHERE  id = :id ", nativeQuery = true)
-    public User getById(@Param("id") Long uid);
+    @Query(value = "  SELECT * FROM users WHERE  id = :id ", nativeQuery = true)
+    User getById(@Param("id") Long uid);
 }

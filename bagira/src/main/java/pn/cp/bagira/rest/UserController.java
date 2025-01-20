@@ -12,9 +12,6 @@ import pn.cp.bagira.entities.User;
 import pn.cp.bagira.srv.AppDataService;
 import pn.cp.bagira.srv.UserDataService;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/user")
 @Slf4j
@@ -36,8 +33,8 @@ public class UserController {
     private AppDataService appService;
 
     @GetMapping("/new")
-    public User create( ) throws JsonProcessingException {
-     User u = userDataService.create( );
+    public User create() throws JsonProcessingException {
+        User u = userDataService.create();
         log.info(
                 "USER CREATED: {} \n ", u
         );
@@ -46,26 +43,25 @@ public class UserController {
     }
 
     @GetMapping("/f/{id}")
-    public User  userByID(@PathVariable Long id){
+    public User userByID(@PathVariable Long id) {
         log.info("  U ID {}", id);
-        User u = userRepository.findById(id).get() ;
-      return u;
+        User u = userRepository.findById(id).get();
+        return u;
     }
 
     @PostMapping("/add-app")
-    public User  addAppPermission(@RequestBody String json, @RequestParam String appName)
+    public User addAppPermission(@RequestBody String json, @RequestParam String appName)
             throws JsonProcessingException {
-        ObjectMapper mapper=new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
 //        User u=userRepository.getUserById(json);
-        User u=mapper.readValue(json, User.class);
-      ;
+        User u = mapper.readValue(json, User.class);
         log.info("User found {} ", u);
-        if(u!=null){
-            Application a =appService.create(appName);
+        if (u != null) {
+            Application a = appService.create(appName);
             a.getUserList().add(u);
-            u=  userDataService.addAppPermission(u,a );
-           // a.setUser(u);
+            u = userDataService.addAppPermission(u, a);
+            // a.setUser(u);
             log.info(
                     "\n APP ADDED, \n {} ", a
             );
