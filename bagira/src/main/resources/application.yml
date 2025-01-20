@@ -10,3 +10,7 @@ spring:
     username: postgres
     password: 123
     driverClassName: org.postgresql.Driver
+    # ANOTHER SCHEMA
+    #    hikari:
+    #      schema: livedata
+
