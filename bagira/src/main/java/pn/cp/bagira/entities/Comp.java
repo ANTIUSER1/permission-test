@@ -16,6 +16,7 @@ public class Comp implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String mac;
+    private String ip;
 
     @OneToMany(mappedBy = "comp")
     private Set<User> userSet;
